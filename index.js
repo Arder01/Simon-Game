@@ -16,6 +16,7 @@ $(document).ready(function() {
             var randomChosenColor = buttonColors[randomNum];
             gamepattern.push(randomChosenColor);
             console.log(randomChosenColor);
+            playSound(randomChosenColor);
 
             await flashButton(randomChosenColor);
             await delay(500);
@@ -25,6 +26,7 @@ $(document).ready(function() {
     }
 
     function flashButton(color) {
+        $(this).sou
         return new Promise(resolve => {
             $("#" + color).fadeOut(500).fadeIn(500, resolve);
         });
@@ -44,6 +46,7 @@ $(document).ready(function() {
         $(this).fadeOut(500).fadeIn(500);
 
         var userChosenColor = $(this).attr("id");
+        playSound(userChosenColor)
         userClickedPattern.push(userChosenColor);
 
         if (userClickedPattern.length === gamepattern.length) {
@@ -73,4 +76,9 @@ $(document).ready(function() {
         }
         return true;
     }
+
+    function playSound(name) {
+        var audio = new Audio("sounds/" + name + ".mp3");
+        audio.play();
+      }
 });
